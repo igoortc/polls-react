@@ -1,15 +1,16 @@
-import React from 'react';
+import React from "react"
+import { Route, Switch } from "react-router-dom"
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Question
-        </p>
-      </header>
-    </div>
-  );
-}
+import { Wrapper } from "./components/Wrapper"
 
-export default App;
+import { Questions } from "./containers/Questions"
+
+export default () => (
+  <div>
+    <Wrapper>
+      <Switch>
+        <Route exact path="/" component={Questions} />
+      </Switch>
+    </Wrapper>
+  </div>
+);

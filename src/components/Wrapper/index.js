@@ -1,0 +1,6 @@
+import styled from "styled-components";
+
+export const Wrapper = styled.div`
+  margin-top: 30px;
+  padding: 0 30px;
+`;
