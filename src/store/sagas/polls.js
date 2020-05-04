@@ -1,6 +1,6 @@
 import { put } from "redux-saga/effects";
 import { FETCH_POLLS_SUCCESS, FETCH_POLLS_FAIL, FETCH_POLL_DETAIL_SUCCESS, FETCH_POLL_DETAIL_FAIL } from "../actions/actionTypes";
-import api from "../../utils/api";
+import api from "../../utils/requests/api";
 
 export function* fetchPollsSaga(action) {
   try {
