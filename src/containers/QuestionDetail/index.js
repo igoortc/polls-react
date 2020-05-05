@@ -13,7 +13,8 @@ import { Title } from "../../components/Title";
 export class QuestionDetail extends Component {
 
   state = {
-    currentChoice: null
+    currentChoice: null,
+    voted: false,
   }
 
   componentDidMount = () => {
@@ -32,11 +33,14 @@ export class QuestionDetail extends Component {
     const { updateVotes } = this.props;
     const { currentChoice } = this.state;
     updateVotes(currentChoice);
+    this.setState({
+      voted: true
+    })
   }
 
   render() {
     const { poll, loaded, vote } = this.props;
-    const { currentChoice } = this.state;
+    const { currentChoice, voted } = this.state;
 
     const choices = poll.choices && poll.choices.map(choice => (
         <p key={choice.url}>
@@ -58,14 +62,14 @@ export class QuestionDetail extends Component {
           <CardDescription small>
             <span role="img" aria-label="Time">⏰</span> Published on {sanitizeDate(poll.published_at)}
           </CardDescription>
-        {!vote ?
+        {!voted ?
           <CardDescription>
             <div onChange={event => this.setChoice(event)}>
               {choices}
             </div>
             <PrimaryButton onClick={this.submitVote} disabled={!currentChoice}>Vote!</PrimaryButton>
           </CardDescription> :
-          <p><span role="img" aria-label="Check">✅</span> You voted for {vote.choice}!</p> 
+          vote && <p><span role="img" aria-label="Check">✅</span> You voted for {vote.choice}!</p> 
         }
         </Card> : 'Loading...'}
       </>

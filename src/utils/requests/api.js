@@ -23,8 +23,17 @@ const updateVotes = choiceUrl => {
   });
 };
 
+const newPoll = poll => {
+  return axios({
+    method: "POST",
+    url: `${API_URL}/questions`,
+    data: poll,
+  });
+};
+
 export default {
   fetchPolls,
   fetchPollDetail,
   updateVotes,
+  newPoll,
 };

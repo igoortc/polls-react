@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { newPoll } from "../../store/actions/polls";
 
 import { PrimaryButton, SmallButton } from "../../components/Button";
 import { Card } from "../../components/Card";
@@ -10,7 +11,8 @@ import { Title } from "../../components/Title";
 export class NewQuestion extends Component {
   state = {
     question: "",
-    choices: []
+    choices: [],
+    submitted: false,
   };
   
   createNewField = () => {
@@ -50,21 +52,22 @@ export class NewQuestion extends Component {
   }
   
   handleSubmit = (event) => {
-    const { choices } = this.state;
+    const { question, choices } = this.state;
+    const { newPoll } = this.props;
 
     if (choices.length < 2) alert('Please include at least two options!')
     else {
-      console.log('state', this.state)
+      newPoll({ question, choices });
       this.setState({
-        question: "",
-        choices: []
+        submitted: true,
       })
       event.preventDefault();
     }
   }
 
   render() {
-    const { question } = this.state;
+    const { question, submitted } = this.state;
+    const { poll } = this.props;
 
     return (
       <>
@@ -75,7 +78,8 @@ export class NewQuestion extends Component {
         </Title>
         <Title>Create new poll</Title>
         <Card>
-          <form>
+          {!submitted ? 
+            <form>
               <FormSection>
                 <FormSectionTitle>Question</FormSectionTitle>
                 <input type="text" value={question} onChange={this.handleQuestionChange} />
@@ -95,18 +99,35 @@ export class NewQuestion extends Component {
                 onClick={this.handleSubmit}>
               <span role="img" aria-label="Sparkles">✨</span> Submit poll
               </PrimaryButton>
-          </form>
+            </form> :
+            <p>
+              Poll submitted! <span role="img" aria-label="Hearts">😍</span>
+              {poll &&
+                <CleanLink
+                  decorate="true"
+                  dark="true"
+                  to={poll.url}>
+                    Check it out.
+                </CleanLink>}
+            </p>
+          }
         </Card>
       </>
     );
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    poll: state.pollsReducer.poll,
+  };
+};
+
 const mapDispatchToProps = dispatch => ({
-//   fetchPolls: () => dispatch(fetchPolls()),
+  newPoll: poll => dispatch(newPoll(poll)),
 });
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(NewQuestion);

@@ -4,7 +4,9 @@ import {
   FETCH_POLL_DETAIL_SUCCESS,
   FETCH_POLL_DETAIL_FAIL,
   UPDATE_VOTES_SUCCESS,
-  UPDATE_VOTES_FAIL
+  UPDATE_VOTES_FAIL,
+  NEW_POLL_SUCCESS,
+  NEW_POLL_FAIL,
 } from "../actions/actionTypes";
 
 const initialState = {
@@ -51,6 +53,19 @@ export default (state = initialState, action) => {
         error: false,
       };
     case UPDATE_VOTES_FAIL:
+      return {
+        ...state,
+        loaded: false,
+        error: true,
+      };
+    case NEW_POLL_SUCCESS:
+      return {
+        ...state,
+        loaded: true,
+        poll: action.poll,
+        error: false,
+      };
+    case NEW_POLL_FAIL:
       return {
         ...state,
         loaded: false,

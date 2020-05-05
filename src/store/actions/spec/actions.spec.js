@@ -1,5 +1,4 @@
-import { fetchPolls, fetchPollDetail } from "../polls";
-import { updateVotes } from "../choices";
+import { fetchPolls, fetchPollDetail, updateVotes, newPoll } from "../polls";
 
 describe("Poll actions", () => {
   it("should dispatch FETCH_POLLS action", () => {
@@ -12,5 +11,9 @@ describe("Poll actions", () => {
 
   it("should dispatch UPDATE_VOTES action", () => {
     expect(updateVotes()).toEqual({ type: "UPDATE_VOTES" });
+  });
+
+  it("should dispatch NEW_POLL action", () => {
+    expect(newPoll()).toEqual({ type: "NEW_POLL" });
   });
 });
