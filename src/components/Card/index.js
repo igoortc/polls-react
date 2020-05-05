@@ -8,7 +8,7 @@ export const Card = styled.div`
     border-radius: 5px;
     padding: 10px;
     transition: 0.3s;
-    cursor: pointer;
+    cursor: ${props => props.cursor === "pointer" ? "pointer" : "default"};
 
     ${props => props.hover && css`
         &:hover {
@@ -21,7 +21,7 @@ export const Card = styled.div`
 export const CardTitle = styled.span`
   display: block;
   font-size: ${props => props.small ? ({ theme }) => theme.fontSizes.text : ({ theme }) => theme.fontSizes.subtitle};
-  margin-bottom: 15px;
+  margin-bottom: ${props => props.noMargin ? "0" : "15px"};
   font-weight: ${({ theme }) => theme.fontWeights.semiBold};
 `
 

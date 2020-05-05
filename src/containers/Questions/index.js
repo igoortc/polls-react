@@ -12,12 +12,12 @@ export class Questions extends Component {
   }
 
   render() {
-    const { polls } = this.props;
+    const { polls, loaded } = this.props;
 
     return (
       <>
         <Title>Questions App! <span role="img" aria-label="Boom!">💥</span></Title>
-        <List items={polls} />
+        {loaded ? <List items={polls} /> : 'Loading...'}
       </>
     );
   }
@@ -26,6 +26,7 @@ export class Questions extends Component {
 const mapStateToProps = state => {
   return {
     polls: state.pollsReducer.polls,
+    loaded: state.pollsReducer.loaded
   };
 };
 

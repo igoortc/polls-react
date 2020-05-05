@@ -11,6 +11,7 @@ export const List = ({ items, history }) => {
         <Card
           small
           hover
+          cursor="pointer"
           key={item.url}
           onClick={() => {
             history.push(`/poll${item.url}`);
