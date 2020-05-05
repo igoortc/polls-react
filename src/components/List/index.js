@@ -1,14 +1,12 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
+import { sanitizeDate } from "../../utils/date"
 import { Card, CardTitle, CardDescription } from "../Card";
 import { PollsList } from "./styled";
 
 export const List = ({ items, history }) => {
   const styledList =
     items && items.map(item => {
-      const publishedDate = new Date(item.published_at);
-      const date = publishedDate.toLocaleDateString();
-      const time = publishedDate.toLocaleTimeString([],{hour: '2-digit', minute:'2-digit'})
       return (
         <Card
           small
@@ -28,7 +26,7 @@ export const List = ({ items, history }) => {
           </CardDescription>
           <CardDescription small>
             <span role="img" aria-label="Time">⏰</span>
-            Published on {date} at {time}
+            Published on {sanitizeDate(item.published_at)}
           </CardDescription>
         </Card>
       )
