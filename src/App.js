@@ -1,10 +1,11 @@
-import React from "react"
-import { Route, Switch } from "react-router-dom"
+import React from "react";
+import { Route, Switch } from "react-router-dom";
 
-import { Wrapper } from "./components/Wrapper"
+import { Wrapper } from "./components/Wrapper";
 
-import Questions from "./containers/Questions"
-import QuestionDetail from "./containers/QuestionDetail"
+import NewQuestion from "./containers/NewQuestion";
+import Questions from "./containers/Questions";
+import QuestionDetail from "./containers/QuestionDetail";
 
 export default () => (
   <div>
@@ -12,6 +13,7 @@ export default () => (
       <Switch>
         <Route exact path="/" component={Questions} />
         <Route exact path="/questions/:pollId" component={QuestionDetail} />
+        <Route exact path="/new" component={NewQuestion} />
       </Switch>
     </Wrapper>
   </div>

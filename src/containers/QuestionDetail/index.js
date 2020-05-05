@@ -5,7 +5,7 @@ import { fetchPollDetail, updateVotes } from "../../store/actions/polls";
 
 import { sanitizeDate } from "../../utils/date"
 
-import { Button } from "../../components/Button";
+import { PrimaryButton } from "../../components/Button";
 import { Card, CardTitle, CardDescription } from "../../components/Card";
 import { CleanLink } from "../../components/CleanLink";
 import { Title } from "../../components/Title";
@@ -63,7 +63,7 @@ export class QuestionDetail extends Component {
             <div onChange={event => this.setChoice(event)}>
               {choices}
             </div>
-            <Button onClick={this.submitVote} disabled={!currentChoice}>Vote!</Button>
+            <PrimaryButton onClick={this.submitVote} disabled={!currentChoice}>Vote!</PrimaryButton>
           </CardDescription> :
           <p><span role="img" aria-label="Check">✅</span> You voted for {vote.choice}!</p> 
         }

@@ -33,7 +33,6 @@ export function* fetchPollDetailSaga(action) {
 
 export function* updateVotesSaga(action) {
   try {
-    console.log('aaaaction', action.choiceUrl)
     const response = yield api.updateVotes(action.choiceUrl);
     const vote = yield response.data;
     yield put({ type: UPDATE_VOTES_SUCCESS, vote });

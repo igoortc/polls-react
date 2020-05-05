@@ -4,7 +4,7 @@ export const Card = styled.div`
     background-color: ${({ theme } ) => theme.colors.beauBlue};
     width: ${props => props.small ? "250px" : "600px"};
     height: auto;
-    margin: 20px 10px;
+    margin: 20px 10px 20px 0;
     border-radius: 5px;
     padding: 10px;
     transition: 0.3s;

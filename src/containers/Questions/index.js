@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchPolls } from "../../store/actions/polls";
+
+import { PrimaryButton } from "../../components/Button";
+import { CleanLink } from "../../components/CleanLink";
 import List from "../../components/List";
 import { Title } from "../../components/Title";
 
@@ -17,6 +20,9 @@ export class Questions extends Component {
     return (
       <>
         <Title>Questions App! <span role="img" aria-label="Boom!">💥</span></Title>
+        <CleanLink to="/new">
+          <PrimaryButton><span role="img" aria-label="Sparkles">✨</span> Create new poll!</PrimaryButton>
+        </CleanLink>
         {loaded ? <List items={polls} /> : 'Loading...'}
       </>
     );
