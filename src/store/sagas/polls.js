@@ -23,7 +23,6 @@ export function* fetchPollsSaga(action) {
 
 export function* fetchPollDetailSaga(action) {
   try {
-    console.log('addddd', action.id)
     const response = yield api.fetchPollDetail(action.id);
     const poll = yield response.data;
     yield put({ type: FETCH_POLL_DETAIL_SUCCESS, poll });

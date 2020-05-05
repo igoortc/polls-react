@@ -18,7 +18,8 @@ const theme = {
     beauBlue: "#CCD8E0",
     yaleBlue: '#1B5088',
     frenchLilac: '#755B8C',
-    eerieBlack: '#202223'
+    eerieBlack: '#202223',
+    cadetGrey: '#a0adb5'
   }
 };
 
