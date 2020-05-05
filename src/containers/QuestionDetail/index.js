@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { fetchPollDetail } from "../../store/actions/polls";
+import { fetchPollDetail, updateVotes } from "../../store/actions/polls";
 
 import { sanitizeDate } from "../../utils/date"
 
@@ -11,18 +11,39 @@ import { Title } from "../../components/Title";
 
 export class QuestionDetail extends Component {
 
+  state = {
+    currentChoice: null
+  }
+
   componentDidMount = () => {
     const { pollId } = this.props.match.params
     const { fetchPollDetail } = this.props;
     fetchPollDetail(pollId);
   }
 
-  render() {
-    const { poll, loaded } = this.props;
-
-    const choices = poll.choices && poll.choices.map(choice => {
-      return <li key={choice.url}>{choice.choice} ({choice.votes} {choice.votes === 1 ? 'vote' : 'votes'})</li>
+  setChoice = event => {
+    this.setState({
+      currentChoice: event.target.value
     })
+  }
+
+  submitVote = () => {
+    const { updateVotes } = this.props;
+    const { currentChoice } = this.state;
+    updateVotes(currentChoice);
+  }
+
+  render() {
+    const { poll, loaded, vote } = this.props;
+    const { currentChoice } = this.state;
+
+    const choices = poll.choices && poll.choices.map(choice => (
+        <p key={choice.url}>
+          <input type="radio" value={choice.url} name={poll.url} />
+          {choice.choice} ({choice.votes} {choice.votes === 1 ? 'vote' : 'votes'})
+        </p>
+      )
+    )
 
     return (
       <>
@@ -36,11 +57,15 @@ export class QuestionDetail extends Component {
           <CardDescription small>
             <span role="img" aria-label="Time">⏰</span> Published on {sanitizeDate(poll.published_at)}
           </CardDescription>
+        {!vote ?
           <CardDescription>
-            <ul>
+            <div onChange={event => this.setChoice(event)}>
               {choices}
-            </ul>
-          </CardDescription>
+            </div>
+            <button onClick={this.submitVote} disabled={!currentChoice}>Submit</button>
+          </CardDescription> :
+          <p><span role="img" aria-label="Check">✅</span> You voted for {vote.choice}!</p> 
+        }
         </Card> : 'Loading...'}
       </>
     );
@@ -50,12 +75,14 @@ export class QuestionDetail extends Component {
 const mapStateToProps = state => {
   return {
     poll: state.pollsReducer.poll,
-    loaded: state.pollsReducer.loaded
+    loaded: state.pollsReducer.loaded,
+    vote: state.pollsReducer.vote,
   };
 };
 
 const mapDispatchToProps = dispatch => ({
   fetchPollDetail: id => dispatch(fetchPollDetail(id)),
+  updateVotes: choiceUrl => dispatch(updateVotes(choiceUrl)),
 });
 
 export default withRouter(

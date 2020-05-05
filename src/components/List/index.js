@@ -14,7 +14,7 @@ export const List = ({ items, history }) => {
           cursor="pointer"
           key={item.url}
           onClick={() => {
-            history.push(`/poll${item.url}`);
+            history.push(`${item.url}`);
           }}
         >
           <CardTitle small>

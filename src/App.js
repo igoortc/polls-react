@@ -11,7 +11,7 @@ export default () => (
     <Wrapper>
       <Switch>
         <Route exact path="/" component={Questions} />
-        <Route exact path="/poll/questions/:pollId" component={QuestionDetail} />
+        <Route exact path="/questions/:pollId" component={QuestionDetail} />
       </Switch>
     </Wrapper>
   </div>
