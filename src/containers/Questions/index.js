@@ -17,7 +17,7 @@ export class Questions extends Component {
     return (
       <>
         <Title>Questions App! <span role="img" aria-label="Boom!">💥</span></Title>
-        <List items={polls.polls} />
+        <List items={polls} />
       </>
     );
   }
@@ -25,7 +25,7 @@ export class Questions extends Component {
 
 const mapStateToProps = state => {
   return {
-    polls: state.polls,
+    polls: state.pollsReducer.polls,
   };
 };
 

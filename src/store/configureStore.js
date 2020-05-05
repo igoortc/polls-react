@@ -9,8 +9,8 @@ const sagaMiddleware = createSagaMiddleware();
 export default () => {
   const store = createStore(
     combineReducers({
-      polls: pollsReducer,
-      error: errorsReducer,
+      pollsReducer,
+      errorsReducer,
     }),
     applyMiddleware(sagaMiddleware)
   );
