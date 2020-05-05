@@ -6,7 +6,8 @@ const theme = {
   fontSizes: {
     title: "24px",
     subtitle: "18px",
-    text: "14px"
+    text: "14px",
+    small: "12px"
   },
   fontWeights: {
     normal: "400",
@@ -14,9 +15,10 @@ const theme = {
     bold: "700"
   },
   colors: {
-    primary: "#CCD8E0",
-    secondary: "#2E4D58",
-    background: "#00202B"
+    beauBlue: "#CCD8E0",
+    yaleBlue: '#1B5088',
+    frenchLilac: '#755B8C',
+    eerieBlack: '#202223'
   }
 };
 

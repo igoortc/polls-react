@@ -9,7 +9,7 @@ const GlobalStyle = createGlobalStyle`
 
   body {
     font-family: ${theme.fonts.primary};
-    background-color: ${theme.colors.background};
+    background-color: ${theme.colors.yaleBlue};
   }
 `;
 

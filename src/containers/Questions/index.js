@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchPolls } from "../../store/actions/polls";
 import List from "../../components/List";
+import { Title } from "../../components/Title";
 
 export class Questions extends Component {
 
@@ -14,9 +15,10 @@ export class Questions extends Component {
     const { polls } = this.props;
 
     return (
-      <div>
+      <>
+        <Title>Questions App! <span role="img" aria-label="Boom!">💥</span></Title>
         <List items={polls.polls} />
-      </div>
+      </>
     );
   }
 }
