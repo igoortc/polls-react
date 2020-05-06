@@ -2,7 +2,8 @@ import styled, { css } from "styled-components";
 
 export const Card = styled.div`
     background-color: ${({ theme } ) => theme.colors.beauBlue};
-    width: ${props => props.small ? "250px" : "600px"};
+    width: ${props => props.small ? "250px" : "auto"};
+    max-width: ${props => props.small ? "250px" : "600px"};
     height: auto;
     margin: 20px 10px 20px 0;
     border-radius: 5px;

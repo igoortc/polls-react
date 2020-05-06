@@ -55,7 +55,8 @@ export class NewQuestion extends Component {
     const { question, choices } = this.state;
     const { newPoll } = this.props;
 
-    if (choices.length < 2) alert('Please include at least two options!')
+    if (question === '') alert('Please include a question!');
+    else if (choices.length < 2) alert('Please include at least two options!');
     else {
       newPoll({ question, choices });
       this.setState({

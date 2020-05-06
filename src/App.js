@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 
 import { Wrapper } from "./components/Wrapper";
 
@@ -14,6 +14,7 @@ export default () => (
         <Route exact path="/" component={Questions} />
         <Route exact path="/questions/:pollId" component={QuestionDetail} />
         <Route exact path="/new" component={NewQuestion} />
+        <Redirect to="/" />
       </Switch>
     </Wrapper>
   </div>

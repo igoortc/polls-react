@@ -39,7 +39,7 @@ export class QuestionDetail extends Component {
   }
 
   render() {
-    const { poll, loaded, vote } = this.props;
+    const { poll, loaded, error, vote } = this.props;
     const { currentChoice, voted } = this.state;
 
     const choices = poll.choices && poll.choices.map(choice => (
@@ -57,21 +57,24 @@ export class QuestionDetail extends Component {
             <span role="img" aria-label="Go back home!" alt="Go back home!">⬅️</span> Questions App!
           </CleanLink>
         </Title>
-        {loaded ? <Card>
-          <CardTitle noMargin>{poll.question}</CardTitle>
-          <CardDescription small>
-            <span role="img" aria-label="Time">⏰</span> Published on {sanitizeDate(poll.published_at)}
-          </CardDescription>
-        {!voted ?
-          <CardDescription>
-            <div onChange={event => this.setChoice(event)}>
-              {choices}
-            </div>
-            <PrimaryButton onClick={this.submitVote} disabled={!currentChoice}>Vote!</PrimaryButton>
-          </CardDescription> :
-          vote && <p><span role="img" aria-label="Check">✅</span> You voted for {vote.choice}!</p> 
-        }
-        </Card> : 'Loading...'}
+          {loaded && !error ? 
+            <Card>
+              <CardTitle noMargin>{poll.question}</CardTitle>
+              <CardDescription small>
+                <span role="img" aria-label="Time">⏰</span> Published on {sanitizeDate(poll.published_at)}
+              </CardDescription>
+            {!voted ?
+              <CardDescription>
+                <div onChange={event => this.setChoice(event)}>
+                  {choices}
+                </div>
+                <PrimaryButton onClick={this.submitVote} disabled={!currentChoice}>Vote!</PrimaryButton>
+              </CardDescription> :
+              vote && <p><span role="img" aria-label="Check">✅</span> You voted for {vote.choice}!</p> 
+            }
+            </Card> : !error && 'Loading...'
+          }
+          {error && <p>Error! <span role="img" aria-label="No">🙅‍♀️</span>Try a different question.</p>}
       </>
     );
   }
@@ -81,6 +84,7 @@ const mapStateToProps = state => {
   return {
     poll: state.pollsReducer.poll,
     loaded: state.pollsReducer.loaded,
+    error: state.pollsReducer.error,
     vote: state.pollsReducer.vote,
   };
 };
