@@ -3,7 +3,7 @@ This is a simple React app that shows polls from the [Polls API](https://pollsap
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-📺 Live version: TBA
+📺 Live version: [https://polls-react.herokuapp.com/](https://polls-react.herokuapp.com/)
 
 ## Available Scripts
 
